@@ -5,6 +5,8 @@
 <script>
 import RandomXkcd from './components/RandomXkcd.vue';
 
+
+
 export default {
   name: 'App',
   components: {

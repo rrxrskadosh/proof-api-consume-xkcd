@@ -2,19 +2,23 @@
   <html>
     <head><title>XKCD Random</title></head>
     <body>
-      <h1>XKCD Random</h1>
+      <h1 class="main-title">XKCD Random</h1>
       <div id="app">
         <div v-if="loading">
-          <p>Loading...</p>
+          <p class="loading">Loading...</p>
         </div>
         <div class="container" v-else>
           <div class="row">
-            <p><button class="btn-random" v-on:click="randomComic">Random</button></p>
-            <h2>{{current.safe_title}}</h2>
-            <img v-bind:src="current.img" v-bind:alt="current.alt">
-            <p>{{current.alt}}</p>
-            <p><i>#{{current.num}}, drawn on {{current.day}} {{month}} {{current.year}}</i></p>
-            <star-rating></star-rating>
+            <div class="main-column">
+              <p><button class="btn-random" v-on:click="randomComic">Random</button></p>
+              <h2 class="secondary-title">{{current.safe_title}}</h2>
+              <img class="img-comic" v-bind:src="current.img" v-bind:alt="current.alt">
+              <div class="content-text-comic">
+                <p class="text-alt">{{current.alt}}</p>
+                <p class="text-comic"><i>#{{current.num}}, drawn on {{current.day}} {{month}} {{current.year}}</i></p>
+              </div>
+              <star-rating></star-rating>
+            </div>
           </div>
         </div>
       </div>
@@ -23,6 +27,7 @@
 </template>
 
 <script>
+import axios from "axios"; //Import Axios
 import StarRating from './StarRating.vue';
 
 export default {
@@ -112,15 +117,57 @@ export default {
   
   html,
   body {
+    background: rgb(33,175,230);
+    background: linear-gradient(90deg, rgba(33,175,230,1) 12%, rgba(48,219,195,1) 95%);
     height: 100%;
   }
-
-  .container {
-
+  .main-title {
+    color: #fff;
+    font-size: 40px;
+    font-family: 'Poppins' !important;
+    text-align: center;
   }
-
+  .loading {
+    color:#fff;
+    font-size: 18px;
+    font-family: 'Poppins';
+    text-align: center;   
+  }
+  .container {
+    .row {
+      display: flex;
+      justify-content: center;
+      .main-column {
+        text-align: center;
+          .secondary-title {
+            color: #fff;
+            font-size: 30px;
+            font-family: 'Poppins' !important;
+          }
+          .content-text-comic {
+            margin-left:20%;
+            margin-right:20%;
+            line-height:1.8;
+          .text-alt,
+          .text-comic {
+            color:#fff;
+            font-size: 16px;
+            font-family: 'Comic Neue';           
+          }
+        }
+      }
+    }
+  }
+  
   .btn-random {
-    background: red;
+    color:#fff;
+    font-size: 16px;
+    font-family: 'Poppins';
+    background: #002551;
+    border: solid thin #002551;
+    padding: 12px 40px 12px 40px;
+    border-radius:15px;
+    cursor:pointer;
   }
 
 </style>
